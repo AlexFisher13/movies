@@ -30,4 +30,14 @@ public class MovieController {
                 .map(Movie::getTitle).collect(Collectors.toList());
     }
 
+    @GetMapping("/moviesWithActor2")
+    public List<String> findMoviesWithActor(@RequestParam String actorName) {
+        return movieDao.findMoviesWithActor(actorName);
+    }
+
+    @GetMapping("/findMovieById")
+    public Movie findMovieById(@RequestParam Integer id) {
+        return movieDao.findMovieById(id);
+    }
+
 }
