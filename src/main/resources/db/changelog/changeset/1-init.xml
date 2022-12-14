@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="1" author="fisher">
+        <sql>
+            create table actor (id bigint not null, birth date, name varchar(255), primary key (id)) engine=InnoDB;
+            create table actor_seq (next_val bigint) engine=InnoDB;
+            insert into actor_seq values ( 1 );
+            create table movie (id bigint not null, duration integer, rating float(53), release_date date, title varchar(255), primary key (id)) engine=InnoDB;
+            create table movie_actors (movie_id bigint not null, actors_id bigint not null, primary key (movie_id, actors_id)) engine=InnoDB;
+            create table movie_seq (next_val bigint) engine=InnoDB;
+            insert into movie_seq values ( 1 );
+            alter table movie_actors add constraint FKoxmxj61v0a9qs12vboo8rxpno foreign key (actors_id) references actor (id);
+            alter table movie_actors add constraint FKbsto8yef4btokhveihmkg8876 foreign key (movie_id) references movie (id);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
